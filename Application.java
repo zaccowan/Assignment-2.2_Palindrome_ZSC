@@ -20,7 +20,7 @@ public class Application {
 			System.out.println("Please enter a word to test if it is a palindrome. Enter \"Q\" to stop.");
 			stringToTest = scan.nextLine();
 			
-			System.out.println("Word Entered:\t" + stringToTest + "\nIs Palindrome:\t" + isPalindrome(stringToTest));
+			System.out.println("Word Entered:\t" + stringToTest + "\nIs Palindrome:\t" + isPalindromeNoStack(stringToTest));
 		}
 		
 		
@@ -29,7 +29,7 @@ public class Application {
 	
 	
 	/**
-	 * Method to test if a string is a palindrome.
+	 * Method to test if a string is a palindrome using a Stack.
 	 * @param str String to test
 	 * @return True if string is a palindrome
 	 */
@@ -55,6 +55,27 @@ public class Application {
 			char tempEndChar = reverseString.pop();
 			char tempStartChar = trimmedWord.charAt(index);
 			if( tempStartChar != tempEndChar ) {
+				isPalindrome = false;
+				break;
+			}
+		}
+		
+		return isPalindrome;
+	}
+	
+	
+	/**
+	 * Method to test if a string is a palindrome.
+	 * @param str String to test
+	 * @return True if string is a palindrome
+	 */
+	public static boolean isPalindromeNoStack(String str) {
+		boolean isPalindrome = true;
+		
+		String trimmedWord = str.replaceAll(" ", "");
+		
+		for( int index = 0 ; index < trimmedWord.length() - 1 ; index++ ) {
+			if( trimmedWord.charAt(index) != trimmedWord.charAt(trimmedWord.length() -1 - index ) ) {
 				isPalindrome = false;
 				break;
 			}
