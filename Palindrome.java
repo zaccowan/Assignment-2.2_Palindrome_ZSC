@@ -1,23 +1,48 @@
 import java.util.Stack;
 
+/**
+ * Application to store a Palindrome and provide methods to test stored value.
+ * @author Zac Cowan
+ * @version 9/22/2022
+ * Fall/2022
+ */
 public class Palindrome {
 	private String originalStr = "";
-	private String trimmedStr = originalStr.replaceAll(" ", "");
 	private Stack<Character> reverseString;
-	private boolean isAPalindrome;
 	
 	Palindrome() {
-		this.reverseString = new Stack<Character>();
-		this.originalStr = "";
-		this.isAPalindrome = false;
+		reverseString = new Stack<Character>();
+		setString("");
 	}
 	Palindrome(String str) {
-		this.reverseString = new Stack<Character>();
+		reverseString = new Stack<Character>();
+		setString(str);
+	}
+
+	
+	/**
+	 * @param str String to store in Palindrome Object
+	 */
+	public void setString(String str) {
 		this.originalStr = str;
-		this.isAPalindrome = false;
 	}
 	
-	public static boolean checkIsPalindrome(String trimmedStr, Stack<Character> reverseString) {
+	/**
+	 * @return String stored in Palindrome Object
+	 */
+	public String getString() {
+		return originalStr;
+	}
+	
+	
+	/**
+	 * Test if string stored in Palindrome object is a palindrome.
+	 * @return True if string stored is a palindrome
+	 */
+	public boolean isPalindrome() {
+		boolean isPalindrome = true;
+		String trimmedStr = originalStr.replaceAll(" ", "");
+		
 		//Adds string characters to a stack
 		for( int index = 0 ; index < trimmedStr.length() ; index++ ) {
 			reverseString.push(trimmedStr.charAt(index));
@@ -29,9 +54,17 @@ public class Palindrome {
 			char tempEndChar = reverseString.pop();
 			char tempStartChar = trimmedStr.charAt(index);
 			if( tempStartChar != tempEndChar ) {
+				isPalindrome = false;
 				break;
 			}
 		}
+		
+		return isPalindrome;
 	}
+	
+	
+	
+	
+	
 
 }
